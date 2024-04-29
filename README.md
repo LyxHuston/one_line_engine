@@ -5,3 +5,5 @@ Well, worry no more!  With this module turn *any* multi-line python file into a 
 Current functionality:
 
 - Whoops this is initial commit, it doesn't do anything
+
+This project is distributed under a modified beer-ware license.
