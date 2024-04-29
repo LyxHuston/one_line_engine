@@ -18,7 +18,7 @@ class Include:
 class Includes(enum.Enum):
 	Import = Include([
 		"exec('import importlib')",
-		"globals().update({'__import': importlib.import_module, '__get_names': lambda mod, names: (getattr(mod, name) for name in names)})"
+		"globals().update({'__import': importlib.import_module})"
 	])
 	CustomExceptions = Include([
 		"globals().__setitem__('CustomException', type('customException', tuple([RuntimeException]), {}))",
@@ -37,11 +37,16 @@ def startswith(text: str) -> Callable[[str], bool]:
 	return lambda line: line.startswith(text)
 
 
-def single_import(text: str) -> str:
+def extract_name_module(text: str):
 	name = text
 	module = text
 	if " as " in text:
 		module, name = text.split(" as ")
+	return name, module
+
+
+def single_import(text: str) -> str:
+	name, module = extract_name_module(text)
 	return f"'{name}': __import('{module}')"
 
 
@@ -53,6 +58,17 @@ class Protocols(enum.Enum):
 			for i in
 			line[7:].split(",")
 		]) + "})"],
+		{Includes.Import}
+	)
+	FromImport = Statement(
+		startswith("from"),
+		(lambda constructor: lambda line: constructor(*line[5:].split(" import ")))(
+			lambda module_name, name_list: [
+				"(lambda module: globals().update({n: getattr(module, v) for n, v in [" + ", ".join([
+					str(extract_name_module(txt.strip())) for txt in name_list.split(",")
+				]) + "]}))(__import('" + module_name + "'))"
+			]
+		),
 		{Includes.Import}
 	)
 
