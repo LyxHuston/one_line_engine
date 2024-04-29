@@ -41,7 +41,7 @@ def single_import(text: str) -> str:
 	name = text
 	module = text
 	if " as " in text:
-		name, module = text.split(" as ")
+		module, name = text.split(" as ")
 	return f"'{name}': __import('{module}')"
 
 

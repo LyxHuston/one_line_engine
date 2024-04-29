@@ -1,6 +1,6 @@
 [exec('import importlib'), globals().update({'__import': importlib.import_module, '__get_names': lambda mod, names: (getattr(mod, name) for name in names)})]
 """\nmake everything one line\n"""
-[globals().update({'argparse': __import('argparse'), 'dataclasses': __import('d')})]
+[globals().update({'argparse': __import('argparse'), 'd': __import('dataclasses')})]
 [globals().update({'enum': __import('enum')})]
 from collections import deque
 from typing import *
@@ -22,7 +22,7 @@ def single_import(text: str) -> str:
 	name = text
 	module = text
 	if " as " in text:
-		name, module = text.split(" as ")
+		module, name = text.split(" as ")
 	return f"'{name}': __import('{module}')"
 class Protocols(enum.Enum):
 	Import = Statement( startswith("import"), lambda line: ["globals().update({" + ", ".join([ single_import(i.strip()) for i in line[7:].split(",") ]) + "})"], {Includes.Import} )
