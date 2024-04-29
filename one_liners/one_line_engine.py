@@ -15,9 +15,8 @@ def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
 		c = inp[i]
 		c3 = inp[i:i + 3]
 		if triple_quote is None:
-
+			'# triple quote detection'
 			if c3 in triple_quotes:
-				'# triple quote detection'
 				triple_quote = c3
 				i += 3
 				continue
@@ -31,32 +30,26 @@ def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
 			i += 1
 			continue
 		if str_char is None:
-
+			'# not in a string check'
 			if c == "\\":
-
-				prune = i
-				'# not in a string check'
 				'# weird line continuation thing'
+				prune = i
 			elif c == "#":
-
-				break
 				'# comment checking'
+				break
 			elif c == ";":
-
+				'# statement separator'
 				if stack:
-					'# statement separator'
 					raise SyntaxError("File is formatted incorrectly.  Semicolon before closing brackets.")
 				return False, 0, 0, i
 			elif prune is not None and c not in whitespace:
 				raise SyntaxError("File is formatted incorrectly.  Statement after line continuation.")
 			elif c in bracket_pairs:
-
-				stack.append(bracket_pairs[c])
 				'# ascend bracket'
+				stack.append(bracket_pairs[c])
 			elif stack and c == stack[-1]:
-
-				del stack[-1]
 				'# descend bracket'
+				del stack[-1]
 			elif c in quotes:
 				str_char = c
 		elif c == "\\":
@@ -72,9 +65,8 @@ def reduce_whitespace(line: str) -> str:
 	"""\n\tremoves unimportant whitespace (eg repeat whitespaces outside of strings).\n\tAlso converts preceding whitespace to tabs\n\t:param line: string line to modify\n\t:return:\n\t"""
 	i = 0
 	while i < len(line):
-
-		c = line[i]
 		'# check preceding whitespace'
+		c = line[i]
 		if c not in whitespace:
 			break
 		i += 1
@@ -83,9 +75,8 @@ def reduce_whitespace(line: str) -> str:
 	res = ["\t" * i]
 	in_quote: [str] = None
 	while i < len(line):
-
-		c = line[i]
 		'# check interior whitespace'
+		c = line[i]
 		if in_quote is None:
 			if c in whitespace:
 				if res[-1] != " ":
@@ -177,11 +168,13 @@ def pre_process(lines: list[str]):
 			indents = "\t" * (indentation(lines[i]) + (lines[i][-1] == ":"))
 			while comments_queue:
 				i += 1
+				print("inserting comment " + ascii(comments_queue[0]))
 				lines.insert(i, indents + ascii(comments_queue[0]))
 				del comments_queue[0]
+			i += 1
 		except SyntaxWarning:
+			print("only whitespace, deleting")
 			del lines[i]
-		i += 1
 def run(process: str, output: str = ""):
 	with open(process, "r") as file:
 		lines = file.readlines()

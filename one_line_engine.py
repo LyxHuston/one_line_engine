@@ -211,11 +211,13 @@ def pre_process(lines: list[str]):
 			indents = "\t" * (indentation(lines[i]) + (lines[i][-1] == ":"))
 			while comments_queue:
 				i += 1
+				print("inserting comment " + ascii(comments_queue[0]))
 				lines.insert(i, indents + ascii(comments_queue[0]))
 				del comments_queue[0]
+			i += 1
 		except SyntaxWarning:
+			print("only whitespace, deleting")
 			del lines[i]
-		i += 1
 
 
 def run(process: str, output: str = ""):

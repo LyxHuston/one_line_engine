@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="implement some basic pre-processing features">
+    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/one_line_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_line_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/one_liners/one_line_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_liners/one_line_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,27 +30,27 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2fkbrb7qTIXHhlGxc8r9CZ4D1XB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.example.executor": "Run",
-    "Python.on_example.executor": "Run",
-    "Python.on_self.executor": "Run",
-    "Python.one_line_engine.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/lyx/PycharmProjects/one_line_engine/one_line_engine.py"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.on_example.executor&quot;: &quot;Run&quot;,
+    &quot;Python.on_self.executor&quot;: &quot;Run&quot;,
+    &quot;Python.one_line_engine.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/lyx/PycharmProjects/one_line_engine/one_line_engine.py&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\lyx\PycharmProjects\one_line_engine\one_liners" />
@@ -56,7 +58,7 @@
       <recent name="C:\Users\lyx\PycharmProjects\one_line_engine" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.on_self">
+  <component name="RunManager" selected="Python.on_example">
     <configuration name="on_example" type="PythonConfigurationType" factoryName="Python">
       <module name="one_line_engine" />
       <option name="ENV_FILES" value="" />
@@ -72,7 +74,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/one_line_engine.py" />
-      <option name="PARAMETERS" value="inputs\example.py -o one_liners\example.py -v" />
+      <option name="PARAMETERS" value="inputs\example.py -o one_liners\example.py" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -95,7 +97,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/one_line_engine.py" />
-      <option name="PARAMETERS" value="one_line_engine.py -o one_liners\one_line_engine.py" />
+      <option name="PARAMETERS" value="one_line_engine.py -o one_liners\one_line_engine.py -v" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -148,13 +150,22 @@
       <option name="project" value="LOCAL" />
       <updated>1714370132654</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management">
+      <option name="closed" value="true" />
+      <created>1714371712739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714371712739</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="license" />
     <MESSAGE value="implement some basic pre-processing features" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement some basic pre-processing features" />
+    <MESSAGE value="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management" />
+    <option name="LAST_COMMIT_MESSAGE" value="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management" />
   </component>
 </project>
