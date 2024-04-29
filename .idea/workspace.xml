@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/LICENSE.txt" afterDir="false" />
+    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="license">
+      <change afterPath="$PROJECT_DIR$/inputs/example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/one_line_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_line_engine.py" afterDir="false" />
     </list>
@@ -38,11 +38,47 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.example.executor": "Run",
+    "Python.on_example.executor": "Run",
+    "Python.one_line_engine.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/lyx/PycharmProjects/one_line_engine/one_line_engine.py"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lyx\PycharmProjects\one_line_engine\one_liners" />
+      <recent name="C:\Users\lyx\PycharmProjects\one_line_engine\inputs" />
+      <recent name="C:\Users\lyx\PycharmProjects\one_line_engine" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="on_example" type="PythonConfigurationType" factoryName="Python">
+      <module name="one_line_engine" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/one_line_engine.py" />
+      <option name="PARAMETERS" value="inputs\example.py -o one_liners\example.py -v" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -67,11 +103,20 @@
       <option name="project" value="LOCAL" />
       <updated>1714348466755</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="license">
+      <option name="closed" value="true" />
+      <created>1714348955549</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714348955549</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="license" />
+    <option name="LAST_COMMIT_MESSAGE" value="license" />
   </component>
 </project>
