@@ -1,31 +1,11 @@
-"""
-make everything one line
-"""
-
-
+"""\nmake everything one line\n"""
 import argparse
 from collections import deque
-
-
-bracket_pairs = {
-	"{": "}",
-	"[": "]",
-	"(": ")"
-}
-
-
+bracket_pairs = { "{": "}", "[": "]", "(": ")" }
 quotes = "\"\'"
 triple_quotes = [q * 3 for q in quotes]
-
-
 def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
-	"""
-	detect an unmatched bracket or string on a line
-	as well as where a single line comment starts
-	and if there's a line continuation
-	:param inp:
-	:return: if there is anything unmatched, index for line continuation, comment line start
-	"""
+	"""\n\tdetect an unmatched bracket or string on a line\n\tas well as where a single line comment starts\n\tand if there's a line continuation\n\t:param inp:\n\t:return: if there is anything unmatched, index for line continuation, comment line start\n\t"""
 	str_char = None
 	triple_quote = None
 	stack = deque()
@@ -34,9 +14,10 @@ def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
 	while i < len(inp):
 		c = inp[i]
 		c3 = inp[i:i + 3]
-		# triple quote detection
 		if triple_quote is None:
+
 			if c3 in triple_quotes:
+				'# triple quote detection'
 				triple_quote = c3
 				i += 3
 				continue
@@ -49,27 +30,33 @@ def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
 				continue
 			i += 1
 			continue
-		# not in a string check
 		if str_char is None:
-			# weird line continuation thing
+
 			if c == "\\":
+
 				prune = i
-			# comment checking
+				'# not in a string check'
+				'# weird line continuation thing'
 			elif c == "#":
+
 				break
-			# statement separator
+				'# comment checking'
 			elif c == ";":
+
 				if stack:
+					'# statement separator'
 					raise SyntaxError("File is formatted incorrectly.  Semicolon before closing brackets.")
 				return False, 0, 0, i
 			elif prune is not None and c not in whitespace:
 				raise SyntaxError("File is formatted incorrectly.  Statement after line continuation.")
-			# ascend bracket
 			elif c in bracket_pairs:
+
 				stack.append(bracket_pairs[c])
-			# descend bracket
+				'# ascend bracket'
 			elif stack and c == stack[-1]:
+
 				del stack[-1]
+				'# descend bracket'
 			elif c in quotes:
 				str_char = c
 		elif c == "\\":
@@ -80,22 +67,14 @@ def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
 	if str_char is not None:
 		raise SyntaxError("File is formatted incorrectly.  Single quote string over multiple lines.")
 	return bool(stack) or triple_quote is not None or prune is not None, prune, i, None
-
-
 whitespace = " \n\t\f\r\v"
-
-
 def reduce_whitespace(line: str) -> str:
-	"""
-	removes unimportant whitespace (eg repeat whitespaces outside of strings).
-	Also converts preceding whitespace to tabs
-	:param line: string line to modify
-	:return:
-	"""
+	"""\n\tremoves unimportant whitespace (eg repeat whitespaces outside of strings).\n\tAlso converts preceding whitespace to tabs\n\t:param line: string line to modify\n\t:return:\n\t"""
 	i = 0
-	# check preceding whitespace
 	while i < len(line):
+
 		c = line[i]
+		'# check preceding whitespace'
 		if c not in whitespace:
 			break
 		i += 1
@@ -103,9 +82,10 @@ def reduce_whitespace(line: str) -> str:
 		raise SyntaxWarning("This line is only whitespace, delete it")
 	res = ["\t" * i]
 	in_quote: [str] = None
-	# check interior whitespace
 	while i < len(line):
+
 		c = line[i]
+		'# check interior whitespace'
 		if in_quote is None:
 			if c in whitespace:
 				if res[-1] != " ":
@@ -137,15 +117,12 @@ def reduce_whitespace(line: str) -> str:
 				continue
 			else:
 				res.append(c)
-
 		i += 1
 	if in_quote:
 		raise RuntimeError("unfinished quote in reduce whitespace step")
 	while res[-1] == " ":
 		del res[-1]
 	return "".join(res)
-
-
 def indentation(line: str):
 	i = 0
 	while i < len(line):
@@ -153,27 +130,13 @@ def indentation(line: str):
 			return i
 		i += 1
 	raise RuntimeError("at this point only-whitespace lines should have been removed")
-
-
 def pre_process(lines: list[str]):
-	"""
-	collapse statements that are separated across multiple lines, such as
-
-	[
-		list constructions
-	]
-
-	(
-		tuple constructions, item 2
-	)
-
-	or strings like this
-	also change single line comments to strings alone on a line
-	"""
+	"""\n\tcollapse statements that are separated across multiple lines, such as\n\n\t[\n\t\tlist constructions\n\t]\n\n\t(\n\t\ttuple constructions, item 2\n\t)\n\n\tor strings like this\n\talso change single line comments to strings alone on a line\n\t"""
 	comments_queue = []
 	i = 0
 	while i < len(lines):
-		if not lines[i] or (len(lines[i]) == 1 and lines[i] in whitespace):  # remove empty lines
+		if not lines[i] or (len(lines[i]) == 1 and lines[i] in whitespace):
+			'# remove empty lines'
 			print("empty line")
 			del lines[i]
 			continue
@@ -190,14 +153,17 @@ def pre_process(lines: list[str]):
 			lines[i + 1] = "\t" * indentation(lines[i]) + lines[i + 1]
 			i += 1
 			continue
-		if comment_start < len(lines[i]):  # separate single line comments comments
+		if comment_start < len(lines[i]):
+			'# separate single line comments comments'
 			print("separating comments on " + ascii(lines[i]))
 			comments_queue.append(lines[i][comment_start:-1])
 			lines[i] = lines[i][:comment_start]
-		if prune is not None:  # prune line continuation characters
+		if prune is not None:
+			'# prune line continuation characters'
 			print("pruning line continuation on " + ascii(lines[i]))
 			lines[i] = lines[i][:prune]
-		if collapse:  # if open brackets/triple quote
+		if collapse:
+			'# if open brackets/triple quote'
 			if i + 1 >= len(lines):
 				raise SyntaxError("File is formatted incorrectly.  Unmatched brackets.")
 			print("unmatched bracket on" + ascii(lines[i]) + ".  Combining with " + ascii(lines[i + 1]))
@@ -216,8 +182,6 @@ def pre_process(lines: list[str]):
 		except SyntaxWarning:
 			del lines[i]
 		i += 1
-
-
 def run(process: str, output: str = ""):
 	with open(process, "r") as file:
 		lines = file.readlines()
@@ -225,15 +189,9 @@ def run(process: str, output: str = ""):
 	with open(output, "w") as file:
 		for line in lines:
 			file.write(line + "\n")
-
-
 def parse_command_line() -> tuple[str, str]:
 	global print
-
-	parser = argparse.ArgumentParser(
-		prog='One Line Engine',
-		description='Python programs tend to be so long and tedious, so condense it all into one line!',
-		epilog='Make a nice one-liner.')
+	parser = argparse.ArgumentParser( prog='One Line Engine', description='Python programs tend to be so long and tedious, so condense it all into one line!', epilog='Make a nice one-liner.')
 	parser.add_argument('filename')
 	parser.add_argument('-o', '--output', default="")
 	parser.add_argument('-v', '--verbose', action="store_true")
@@ -244,7 +202,5 @@ def parse_command_line() -> tuple[str, str]:
 	else:
 		print = lambda *args, **kwargs: None
 	return args.filename, args.output
-
-
 if __name__ == "__main__":
 	run(*parse_command_line())
