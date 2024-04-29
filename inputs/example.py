@@ -2,6 +2,8 @@
 oh wow, a file that shows some basic functionalities of this project!
 """
 
+import typing, sys
+
 _ = (
 	"a tuple construction",
 	"how original"
@@ -14,3 +16,4 @@ _ = [
 ]  # and an in-line comment!
 
 print("hi!"); print("new statement, same line!")
+print(typing, sys.dont_write_bytecode)

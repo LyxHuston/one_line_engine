@@ -9,5 +9,6 @@ Current functionality:
 - collapsing brackets/parenthesis and triple quote strings
 - separating comments
 - separating statements based on the newline characters
+- global level import statements
 
 This project is distributed under a modified beer-ware license.

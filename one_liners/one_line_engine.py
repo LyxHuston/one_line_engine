@@ -1,10 +1,35 @@
+[exec('import importlib'), globals().update({'__import': importlib.import_module, '__get_names': lambda mod, names: (getattr(mod, name) for name in names)})]
 """\nmake everything one line\n"""
-import argparse
+[globals().update({'argparse': __import('argparse'), 'dataclasses': __import('d')})]
+[globals().update({'enum': __import('enum')})]
 from collections import deque
+from typing import *
+@d.dataclass
+class Include:
+	statements: list[str]
+	requirements: list[Self] = ()
+class Includes(enum.Enum):
+	Import = Include([ "exec('import importlib')", "globals().update({'__import': importlib.import_module, '__get_names': lambda mod, names: (getattr(mod, name) for name in names)})" ])
+	CustomExceptions = Include([ "globals().__setitem__('CustomException', type('customException', tuple([RuntimeException]), {}))", "globals().__setitem__('CustomExceptionError', type('customExceptionError', tuple([CustomException]), {}))" ])
+@d.dataclass
+class Statement:
+	acceptor: Callable[[str], bool]
+	process: Callable[[str], list[str]]
+	requirements: set[Includes] = frozenset()
+def startswith(text: str) -> Callable[[str], bool]:
+	return lambda line: line.startswith(text)
+def single_import(text: str) -> str:
+	name = text
+	module = text
+	if " as " in text:
+		name, module = text.split(" as ")
+	return f"'{name}': __import('{module}')"
+class Protocols(enum.Enum):
+	Import = Statement( startswith("import"), lambda line: ["globals().update({" + ", ".join([ single_import(i.strip()) for i in line[7:].split(",") ]) + "})"], {Includes.Import} )
 bracket_pairs = { "{": "}", "[": "]", "(": ")" }
 quotes = "\"\'"
 triple_quotes = [q * 3 for q in quotes]
-def detect_unmatched(inp: str) -> tuple[bool, [int], int, [int]]:
+def detect_unmatched(inp: str) -> tuple[bool, Optional[int], int, Optional[int]]:
 	"""\n\tdetect an unmatched bracket or string on a line\n\tas well as where a single line comment starts\n\tand if there's a line continuation\n\t:param inp:\n\t:return: if there is anything unmatched, index for line continuation, comment line start\n\t"""
 	str_char = None
 	triple_quote = None
@@ -175,11 +200,26 @@ def pre_process(lines: list[str]):
 		except SyntaxWarning:
 			print("only whitespace, deleting")
 			del lines[i]
-def run(process: str, output: str = ""):
-	with open(process, "r") as file:
+def process(lines: list[str], includes: set[Includes]):
+	i = 0
+	while i < len(lines):
+		ind = indentation(lines[i])
+		line = lines[i][ind:]
+		for s in Protocols:
+			if s.value.acceptor(line):
+				lines[i] = "\t" * ind + "[" + ", ".join(s.value.process(line)) + "]"
+				includes.update(s.value.requirements)
+				break
+		i += 1
+def run(module: str, output: str = ""):
+	with open(module, "r") as file:
 		lines = file.readlines()
 	pre_process(lines)
+	includes: set[Includes] = set()
+	process(lines, includes)
 	with open(output, "w") as file:
+		for inc in includes:
+			file.write("[" + ", ".join(inc.value.statements) + "]\n")
 		for line in lines:
 			file.write(line + "\n")
 def parse_command_line() -> tuple[str, str]:
@@ -190,7 +230,7 @@ def parse_command_line() -> tuple[str, str]:
 	parser.add_argument('-v', '--verbose', action="store_true")
 	args = parser.parse_args()
 	if args.verbose:
-		import builtins
+		[globals().update({'builtins': __import('builtins')})]
 		print = builtins.print
 	else:
 		print = lambda *args, **kwargs: None

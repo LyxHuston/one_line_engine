@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management">
+    <list default="true" id="79dc7e7f-9ad4-4067-bd99-101d0e4f7050" name="Changes" comment="fix an error with comments that was causing a blank line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inputs/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/inputs/example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/one_line_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_line_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/one_liners/example.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_liners/example.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/one_liners/one_line_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/one_liners/one_line_engine.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +60,7 @@
       <recent name="C:\Users\lyx\PycharmProjects\one_line_engine" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.on_example">
+  <component name="RunManager" selected="Python.on_self">
     <configuration name="on_example" type="PythonConfigurationType" factoryName="Python">
       <module name="one_line_engine" />
       <option name="ENV_FILES" value="" />
@@ -158,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714371712739</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix an error with comments that was causing a blank line">
+      <option name="closed" value="true" />
+      <created>1714406853063</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714406853063</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -166,6 +176,7 @@
     <MESSAGE value="license" />
     <MESSAGE value="implement some basic pre-processing features" />
     <MESSAGE value="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management" />
-    <option name="LAST_COMMIT_MESSAGE" value="I cannot self-respectingly create this without also showing the result of the engine on itself every (working) step of the way&#10;&#10;also improved comment placement and string management" />
+    <MESSAGE value="fix an error with comments that was causing a blank line" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix an error with comments that was causing a blank line" />
   </component>
 </project>
