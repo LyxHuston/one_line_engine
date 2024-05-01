@@ -5,6 +5,7 @@ make everything one line
 
 import argparse, dataclasses as d
 import enum
+import os
 from collections import deque
 from typing import *
 
@@ -328,7 +329,15 @@ def parse_command_line() -> tuple[str, str]:
 		print = builtins.print
 	else:
 		print = lambda *args, **kwargs: None
-	return args.filename, args.output
+	if args.filename.endswith(os.sep):
+		raise NameError("File name is invalid.")
+	output = args.output
+	if output == "":
+		if os.sep in args.filename:
+			output = args.filename[:args.filename.index(os.sep) + 1] + "one_line_" + args.filename[args.filename.index(os.sep) + 1:]
+		else:
+			output = "one_line_" + args.filename
+	return args.filename, output
 
 
 if __name__ == "__main__":
